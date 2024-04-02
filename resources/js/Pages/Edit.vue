@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form action="" @submit.prevent="form.put(`/article/update/${article.id}`)" enctype="multipart/form-data">
+        <form action="" @submit.prevent="updateArticle">
             <div>
                 <label for="">Titre</label>
                 <input type="text" name="" id="" v-model="form.title" />
@@ -17,7 +17,7 @@
                 <label for="">Image actuelle</label>
                 <img :src="form.oldImage" alt="Image actuelle" />
                 <label for="">Nouvelle image</label>
-                <input type="file" @input="imageChange" />
+                <input type="file" @input="form.image = $event.target.files[0]"/>
             </div>
             <div>
                 <input type="submit" value="Modifier" />
@@ -27,11 +27,12 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { useForm,router } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 
 let props = defineProps({
-    article: Object
+    article: Object,
+    image: String
 });
 
 const form = useForm({
@@ -42,9 +43,14 @@ const form = useForm({
     oldImage: props.article.image,
 });
 
-const imageChange = ($event) =>{
-    form.image = $event.target.files[0]
-    console.log('image :',form.image = $event.target.files[0])
+function updateArticle () {
+    router.post(`/article/update/${props.article.id}`, {
+  _method: 'put',
+  title: form.title,
+  author: form.author,
+  content: form.content,
+  image: form.image,
+})
 }
 
 

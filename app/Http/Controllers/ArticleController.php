@@ -90,10 +90,11 @@ class ArticleController extends Controller
             'title' => 'required',
             'author' => 'required',
             'content' => 'required',
-            'image' => 'image'
+            
             
         ]);
-        dd($data);
+        $image = $request->validate(['image' => 'image']);
+
         
 
         if ($request->hasFile('image')) {

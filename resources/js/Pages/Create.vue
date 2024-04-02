@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form action="" @submit.prevent="form.post('/article')">
+        <form action="" @submit.prevent="storeArticle">
             <div>
                 <label for="">Titre</label>
                 <input type="text" name="" id="" v-model="form.title"/>
@@ -32,5 +32,11 @@ const form = useForm({
     author:'',
     content:'',
     image: null
-})
+});
+
+function storeArticle() {
+
+    form.post("/article");
+
+}
 </script>
