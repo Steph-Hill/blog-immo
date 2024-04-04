@@ -23,9 +23,10 @@ class UpdateArticleRequest extends FormRequest
     {
         return [
             'title' => ['required','string'],
-            'author' => ['required','string'],
-            'content' => ['required'],
-            'image' => ['image','nullable']
+            'content' => ['required','string'],
+            'image' => ['image','nullable'],
+            'category_id' =>['integer'],
+
         ];
     }
 }

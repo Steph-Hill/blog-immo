@@ -7,6 +7,7 @@ use App\Models\Article;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
@@ -15,8 +16,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        
         return Inertia::render('Index',[
-            'articles' => Article::all()
+            'articles' => Article::paginate(5),
+            'categories' => Category::all()
         ]);
     }
 
@@ -25,7 +28,10 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Create');
+
+        return Inertia::render('Create',[
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -34,17 +40,18 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         $request->validate([
-            'title' => 'required',
-            'author' => 'required',
-            'content' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' 
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'image' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_id' => 'required|exists:categories,id' 
        ]);
-    
+        $category_id = $request->category_id;
+        $category = Category::find($category_id);
+              
         $article = new Article();
         $article->title = $request->title;
-        $article->author = $request->author;
         $article->content = $request->content;
-
+        $article->category()->associate($category);
         
 
         if ($request->hasFile('image')) {
@@ -53,8 +60,8 @@ class ArticleController extends Controller
             $filePath = $image->storeAs('uploads/images', $fileName, 'public');
             $article->image = '/storage/' . $filePath;
         }
-    
         $article->save();
+        
         return redirect()->route('article-list');
     }
     
@@ -74,9 +81,11 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        
+
         return Inertia::render('Edit',[
-            'article' => $article
+            'article' => $article,
+            'categories' => Category::all()
         ]);
     }
 
@@ -88,29 +97,23 @@ class ArticleController extends Controller
         //
         $data = $request->validate([
             'title' => 'required',
-            'author' => 'required',
             'content' => 'required',
-            
-            
+            'category_id' => 'exists:categories,id' 
         ]);
-        $image = $request->validate(['image' => 'image']);
-
-        
 
         if ($request->hasFile('image')) {
-
-        if ($article->image && Storage::exists($article->image)) {
-            Storage::delete($article->image);
-        }
-
         $file = $request->file('image');
         $fileName = time() . '_' . $file->getClientOriginalName();
         $filePath = $file->storeAs('uploads/images', $fileName, 'public');
         $article->image = '/storage/' . $filePath;
         $article->save();
     }
+        $category_id = $request->input('category_id');
 
-    $article->update($data);
+        $category = Category::find($category_id);
+        $article->category()->associate($category);
+
+        $article->update($data);
 
         return redirect()->route('article-list');
     }
