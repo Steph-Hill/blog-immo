@@ -15,7 +15,7 @@
                 <p class="text-gray-700 leading-tight mb-4" v-else>
                     {{ article.content }}
                 </p>
-                <div class="flex justify-between items-center" v-if="$page.props.auth.user">
+                <div class="flex justify-between items-center" >
                     <div class="flex items-center">
                         <Link :href="`/article/edit/${article.id}`"><button 
                              class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
@@ -35,7 +35,7 @@
                         </button></Link>
                     </div>
                     <div class="flex items-center">
-                        <Link :href="`/article/delete/${article.id}`" method="delete"><button
+                        <Link :href="`/article/delete/${article.id}`" method="delete"  as="button"><button
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                             <span
                                 class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -44,18 +44,7 @@
                         </button></Link>
                     </div>
                 </div>
-                <div class="flex justify-between items-center" v-else="!$page.props.auth.user">
-                    <div class="flex items-center">
-                        <Link :href="`/article/${article.id}`"><button 
-                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-                            <span
-                                class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                Voir plus
-                            </span>
-                        </button></Link>
-                    </div>
-                   
-                </div>
+               
                 
             </div>
         </div>

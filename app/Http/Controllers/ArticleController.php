@@ -71,8 +71,10 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        
         return Inertia::render('Show',[
-            'article' => $article
+            'article' => $article,
+            'category' => $article->category,
         ]);
     }
 

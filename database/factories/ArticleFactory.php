@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +17,12 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
+        $categoryIds = [1, 2, 3, 4, 5]; 
+
         return [
             'title' => fake()->text(50),
-            'content' => fake()->text(100),
+            'content' => fake()->text(200),
+            'category_id' => $this->faker->randomElement($categoryIds),
             
         ];
     }

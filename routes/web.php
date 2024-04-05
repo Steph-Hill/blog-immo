@@ -26,8 +26,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::get('/', [ArticleController::class,'index'])->name('article-list');
+Route::get('/', function(){
+    return Inertia::render('Home');
+});
+Route::get('/articles', [ArticleController::class,'index'])->name('article-list');
 Route::middleware('auth')->group(function () {
 Route::get('/article/create',[ArticleController::class,'create'])->name('article-create');
 Route::get('/article/edit/{article}',[ArticleController::class,'edit'])->name('article-edit');
