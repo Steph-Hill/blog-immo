@@ -45,6 +45,7 @@ class ArticleController extends Controller
             'image' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'category_id' => 'required|exists:categories,id' 
        ]);
+       
         $category_id = $request->category_id;
         $category = Category::find($category_id);
               

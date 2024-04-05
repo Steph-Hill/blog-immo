@@ -1,45 +1,34 @@
 <template>
-
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="flex flex-wrap items-center justify-between     max-w-screen-xl mx-auto p-4">
-           
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Mon Blog</span>
-            
+        <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Mon Blog</span>
+
             <div class="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <div v-if="$page.props.auth.user">
-                    <Link :href="route('login')"
-                        class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-                    Bienvenue :
-                    </Link>
-
-
-                    <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        type="button">
-                        {{ $page.props.auth.user.name }}<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
+                    <Link :href="route('profile.edit')"
+                    class="text-gray-800 dark:text-white hover:bg-blue-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                    {{ $page.props.auth.user.name }}
+                </Link>
+                <Link :href="route('logout')" method="post" as="button"
+                    class="text-gray-800 dark:text-white hover:text-white hover:bg-red-500 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                    Deconnexion
+                </Link>
 
                     <!-- Dropdown menu -->
                     <div id="dropdownInformation"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-
                             <Link :href="route('profile.edit')">
-                            <div class="font-medium truncate">{{ $page.props.auth.user.email }}</div>
+                            <div class="font-medium truncate">
+                                {{ $page.props.auth.user.email }}
+                            </div>
                             </Link>
                         </div>
-
 
                         <div class="py-2 text-center hover:bg-red-500 hover:text-gray-100 hover:rounded-lg">
                             <Link :href="route('logout')" method="post" as="button">Deconnexion</Link>
                         </div>
                     </div>
-
-
                 </div>
                 <div v-else>
                     <Link :href="route('login')"
@@ -49,7 +38,6 @@
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     Inscription</Link>
                 </div>
-
             </div>
             <div id="mega-menu" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
                 <ul class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
@@ -67,19 +55,15 @@
             </div>
         </div>
     </nav>
-
-
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-import { Link } from '@inertiajs/vue3';
-
+import { defineProps } from "vue";
+import { Link } from "@inertiajs/vue3";
 
 defineProps({
     Login: {
         type: Boolean,
     },
 });
-
 </script>
