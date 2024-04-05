@@ -25,7 +25,7 @@ class UpdateArticleRequest extends FormRequest
             'title' => ['required','string'],
             'content' => ['required','string'],
             'image' => ['image','nullable'],
-            'category_id' =>['integer'],
+            'category_id' =>['integer','nullable'],
 
         ];
     }

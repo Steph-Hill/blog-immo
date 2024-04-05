@@ -38,6 +38,7 @@ import NavBlog from '@/Layouts/NavBlog.vue';
 
 let props = defineProps({
     article: Object,
+    categories: Object,
     image: String
 });
 

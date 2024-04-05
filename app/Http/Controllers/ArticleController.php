@@ -18,7 +18,7 @@ class ArticleController extends Controller
     {
         
         return Inertia::render('Index',[
-            'articles' => Article::paginate(5),
+            'articles' => Article::paginate(3),
             'categories' => Category::all()
         ]);
     }

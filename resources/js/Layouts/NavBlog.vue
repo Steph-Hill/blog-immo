@@ -1,11 +1,10 @@
 <template>
 
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
-            <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Mon Blog Immo</span>
-            </a>
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="flex flex-wrap items-center justify-between     max-w-screen-xl mx-auto p-4">
+           
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Mon Blog</span>
+            
             <div class="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <div v-if="$page.props.auth.user">
                     <Link :href="route('login')"
@@ -62,12 +61,14 @@
                     <li>
                         <Link :href="route('article-create')"
                             class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
-                        Contact</Link>
+                        Ajouter un article</Link>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+
 </template>
 
 <script setup>
