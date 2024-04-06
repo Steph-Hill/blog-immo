@@ -55,6 +55,10 @@
             </div>
         </div>
     </nav>
+
+    <div v-if="$page.props.flash.message" class="alert">
+        {{ $page.props.flash.message }}
+      </div>
 </template>
 
 <script setup>

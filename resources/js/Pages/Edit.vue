@@ -10,6 +10,8 @@
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name" type="text" placeholder="Entrer votre titre" v-model="form.title">
+                <InputError class="mt-2" :message="form.errors.title" />
+
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="feedback">
@@ -18,7 +20,9 @@
             <textarea
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="feedback" rows="5" placeholder="Ecriver votre description..." v-model="form.content"></textarea>
-        </div>
+                <InputError class="mt-2" :message="form.errors.content" />
+
+            </div>
         <div class="mb-4">
             <label for="category_id" class="block text-gray-700 font-bold mb-2">Catégorie :</label>
             <select id="category_id" v-model="form.category_id"
@@ -27,6 +31,8 @@
                     {{ category.name }}
                 </option>
             </select>
+            <InputError class="mt-2" :message="form.errors.category_id" />
+
         </div>
         <div class="mb-4">
             <img :src="form.oldImage" class=" rounded-lg shadow"  />
@@ -46,44 +52,13 @@
         </button>
     </form>
 
-
-
-
-    <!-- <div>
-        <form action="" @submit.prevent="updateArticle">
-            <div>
-                <label for="">Titre</label>
-                <input type="text" name="" id="" v-model="form.title" />
-            </div>
-            <div>
-                <label for="">Description</label>
-                <textarea name="" id="" cols="30" rows="10" v-model="form.content"></textarea>
-            </div>
-            <div>
-                <label for="">Image actuelle</label>
-                <img :src="form.oldImage" alt="Image actuelle" />
-                <label for="">Nouvelle image</label>
-                <input type="file" @input="form.image = $event.target.files[0]"/>
-            </div>
-
-            <label for="category_id">Catégorie</label>
-            <select id="category_id" v-model="form.category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option v-for="category in categories" :key="category.id" :value="category.id" :selected="form.category_id">
-                    {{ category.name }}
-                </option>
-            </select>
-
-            <div>
-                <input type="submit" value="Modifier" />
-            </div>
-        </form>
-    </div> -->
 </template>
 
 <script setup>
 import { useForm, router } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 import NavBlog from '@/Layouts/NavBlog.vue';
+import InputError from '@/Components/InputError.vue';
 
 let props = defineProps({
     article: Object,

@@ -10,6 +10,8 @@
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name" type="text" placeholder="Entrer votre titre" v-model="form.title">
+                <InputError class="mt-2" :message="form.errors.title" />
+
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="feedback">
@@ -18,6 +20,7 @@
             <textarea
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="feedback" rows="5" placeholder="Ecriver votre description..." v-model="form.content"></textarea>
+                <InputError class="mt-2" :message="form.errors.content" />
         </div>
         <div class="mb-4">
             <label for="category_id" class="block text-gray-700 font-bold mb-2">Catégorie :</label>
@@ -27,6 +30,7 @@
                     {{ category.name }}
                 </option>
             </select>
+            <InputError class="mt-2" :message="form.errors.category_id" />
         </div>
         <div class="mb-4">
 
@@ -37,7 +41,7 @@
                 aria-describedby="file_input_help" id="file_input" type="file"
                 @input="form.image = $event.target.files[0]">
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG ou GIF</p>
-
+            <InputError class="mt-2" :message="form.errors.image" />
         </div>
         <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -81,6 +85,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 import NavBlog from '@/Layouts/NavBlog.vue';
+import InputError from '@/Components/InputError.vue';
 
 
 
